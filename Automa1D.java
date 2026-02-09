@@ -10,20 +10,23 @@ class Automa1D {
         // vedere se si "propaga"
     }
 
-    public int calcolaStato(int sinistra, int centro, int destra) {
-        regola = 110;
+    public int calcolaStato(int sinistra, int centro, int destra, int regola) {
+        // regola = 110;
 
         String binario = Integer.toBinaryString(regola);
         char[] n = new char[binario.length()];
         for (int i = 0; i < n.length; i++) {
             n[i] = binario.charAt(i);
+            
         }
 
         // System.out.println("numero in binario: " + binario);
 
         // TODO Completa qui: in base a sinistra, centro, destra e la "regola"
-        String stringa = Integer.toString(sinistra) + Integer.toString(centro) + Integer.toString(destra);
+        String stringa = "" + sinistra + "" + centro +"" + destra;
         // devi calcolare il nuovo stato
+       // System.out.println(stringa);
+
         switch (stringa) {
             case "110":
                 return n[0] - '0';
@@ -48,14 +51,29 @@ class Automa1D {
         // TODO Completa qui:
         // per ogni cella, prendi i vicini e calcola il nuovo stato usando
         // "calcolaStato"
-        for (int i = 0; i < nuovoStato.length; i++) {
-            calcolaStato(nuovoStato[i - 1], nuovoStato[i], nuovoStato[i + 1]);
+        
+        for (int i = 1; i < nuovoStato.length - 1; i++) {
+            int cal = calcolaStato(striscia[i - 1], striscia[i], striscia[i + 1], regola);
+            nuovoStato[i] = cal;
         }
         striscia = nuovoStato;
+
+    
+    }
+
+    public void stampa() {
+        for (int c : striscia) {
+            System.out.print(c == 1 ? "█" : " ");
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        Automa1D automa1 = new Automa1D(45, 110);
-    
+        Automa1D ac = new Automa1D(500, 110);
+        for (int i = 0; i < 30; i++) {
+            ac.stampa();
+            ac.nextStato();
+        }
+
     }
 }
