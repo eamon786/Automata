@@ -75,8 +75,8 @@ public class ColoriPersonalizzatiEWait {
     }
 
     public static void main(String[] args) throws InterruptedException {
-         provaColori();
+        // provaColori();
 
-        //barraCaricamento();
+        barraCaricamento();
     }
 }
